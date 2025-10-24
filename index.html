@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EnduroMoto - Мир эндуро мотоциклов</title>
+    <style>
+        /* Общие стили */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Шапка */
+        header {
+            background-color: #1a1a1a;
+            color: white;
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ff6600;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #ff6600;
+        }
+        
+        /* Герой-секция */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://source.unsplash.com/random/1600x900/?enduro,motorcycle') no-repeat center center/cover;
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
+        
+        .hero-content h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        
+        .hero-content p {
+            font-size: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: #ff6600;
+            color: white;
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #e55c00;
+        }
+        
+        /* Секция о нас */
+        .about {
+            padding: 80px 0;
+            background-color: white;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 36px;
+            color: #333;
+        }
+        
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+        
+        .about-text {
+            flex: 1;
+        }
+        
+        .about-image {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        /* Секция моделей */
+        .models {
+            padding: 80px 0;
+            background-color: #f9f9f9;
+        }
+        
+        .models-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .model-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .model-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .model-image {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .model-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .model-card:hover .model-image img {
+            transform: scale(1.1);
+        }
+        
+        .model-info {
+            padding: 20px;
+        }
+        
+        .model-info h3 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .model-info p {
+            color: #666;
+            margin-bottom: 15px;
+        }
+        
+        .model-price {
+            font-weight: bold;
+            color: #ff6600;
+            font-size: 18px;
+        }
+        
+        /* Секция гонок */
+        .events {
+            padding: 80px 0;
+            background-color: white;
+        }
+        
+        .events-list {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        
+        .event-item {
+            display: flex;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .event-date {
+            background-color: #ff6600;
+            color: white;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-width: 100px;
+        }
+        
+        .event-date .day {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .event-date .month {
+            font-size: 16px;
+        }
+        
+        .event-details {
+            padding: 20px;
+            flex: 1;
+        }
+        
+        .event-details h3 {
+            margin-bottom: 10px;
+        }
+        
+        /* Секция контактов */
+        .contact {
+            padding: 80px 0;
+            background-color: #1a1a1a;
+            color: white;
+        }
+        
+        .contact-content {
+            display: flex;
+            gap: 40px;
+        }
+        
+        .contact-info, .contact-form {
+            flex: 1;
+        }
+        
+        .contact-info h3 {
+            margin-bottom: 20px;
+            color: #ff6600;
+        }
+        
+        .contact-info p {
+            margin-bottom: 10px;
+        }
+        
+        .contact-form form {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .contact-form input, .contact-form textarea {
+            padding: 12px;
+            margin-bottom: 15px;
+            border: none;
+            border-radius: 5px;
+            background-color: #333;
+            color: white;
+        }
+        
+        .contact-form button {
+            background-color: #ff6600;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        
+        .contact-form button:hover {
+            background-color: #e55c00;
+        }
+        
+        /* Подвал */
+        footer {
+            background-color: #111;
+            color: #aaa;
+            padding: 40px 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .social-links a {
+            color: #aaa;
+            margin-left: 15px;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: #ff6600;
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 20px;
+            }
+            
+            .about-content, .contact-content {
+                flex-direction: column;
+            }
+            
+            .event-item {
+                flex-direction: column;
+            }
+            
+            .event-date {
+                flex-direction: row;
+                justify-content: space-around;
+                min-width: auto;
+            }
+            
+            .hero-content h1 {
+                font-size: 36px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Шапка -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">EnduroMoto</div>
+                <nav>
+                    <ul>
+                        <li><a href="#home">Главная</a></li>
+                        <li><a href="#about">О нас</a></li>
+                        <li><a href="#models">Модели</a></li>
+                        <li><a href="#events">События</a></li>
+                        <li><a href="#contact">Контакты</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Герой-секция -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Покоряй бездорожье с EnduroMoto</h1>
+                <p>Лучшие эндуро мотоциклы для настоящих экстремалов</p>
+                <a href="#models" class="btn">Смотреть модели</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Секция о нас -->
+    <section class="about" id="about">
+        <div class="container">
+            <h2 class="section-title">О нас</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>EnduroMoto - это команда энтузиастов, которые живут и дышат эндуро мотоциклами. Мы предлагаем широкий выбор мотоциклов для бездорожья, аксессуары и экипировку для настоящих любителей экстрима.</p>
+                    <p>Наша миссия - помочь каждому найти свой идеальный мотоцикл и открыть для себя мир безграничных возможностей вне дорог.</p>
+                    <p>Мы организуем мероприятия, тренировки и экспедиции для всех уровней подготовки - от новичков до опытных райдеров.</p>
+                </div>
+                <div class="about-image">
+                    <img src="https://source.unsplash.com/random/600x400/?enduro,team" alt="Наша команда">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Секция моделей -->
+    <section class="models" id="models">
+        <div class="container">
+            <h2 class="section-title">Популярные модели</h2>
+            <div class="models-grid">
+                <div class="model-card">
+                    <div class="model-image">
+                        <img src="https://source.unsplash.com/random/600x400/?ktm,enduro" alt="KTM 450 EXC-F">
+                    </div>
+                    <div class="model-info">
+                        <h3>KTM 450 EXC-F</h3>
+                        <p>Мощный и легкий эндуро мотоцикл для профессиональных гонок.</p>
+                        <div class="model-price">1 250 000 ₽</div>
+                    </div>
+                </div>
+                <div class="model-card">
+                    <div class="model-image">
+                        <img src="https://source.unsplash.com/random/600x400/?honda,enduro" alt="Honda CRF450X">
+                    </div>
+                    <div class="model-info">
+                        <h3>Honda CRF450X</h3>
+                        <p>Надежный японский эндуро с отличной управляемостью.</p>
+                        <div class="model-price">980 000 ₽</div>
+                    </div>
+                </div>
+                <div class="model-card">
+                    <div class="model-image">
+                        <img src="https://source.unsplash.com/random/600x400/?yamaha,enduro" alt="Yamaha WR450F">
+                    </div>
+                    <div class="model-info">
+                        <h3>Yamaha WR450F</h3>
+                        <p>Универсальный эндуро для трейла и эндуро-гонок.</p>
+                        <div class="model-price">1 100 000 ₽</div>
+                    </div>
+                </div>
+                <div class="model-card">
+                    <div class="model-image">
+                        <img src="https://source.unsplash.com/random/600x400/?beta,enduro" alt="Beta RR 430">
+                    </div>
+                    <div class="model-info">
+                        <h3>Beta RR 430</h3>
+                        <p>Итальянский эндуро с уникальным дизайном и характеристиками.</p>
+                        <div class="model-price">950 000 ₽</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Секция событий -->
+    <section class="events" id="events">
+        <div class="container">
+            <h2 class="section-title">Ближайшие события</h2>
+            <div class="events-list">
+                <div class="event-item">
+                    <div class="event-date">
+                        <div class="day">15</div>
+                        <div class="month">Июня</div>
+                    </div>
+                    <div class="event-details">
+                        <h3>Эндуро-кросс "Грязевой вызов"</h3>
+                        <p>Соревнования для всех уровней подготовки. Призы для победителей!</p>
+                        <p>Место: Московская область, трасса "Экстрим"</p>
+                    </div>
+                </div>
+                <div class="event-item">
+                    <div class="event-date">
+                        <div class="day">28</div>
+                        <div class="month">Июня</div>
+                    </div>
+                    <div class="event-details">
+                        <h3>Тренировка по эндуро для начинающих</h3>
+                        <p>Обучающий курс от профессиональных инструкторов.</p>
+                        <p>Место: Подмосковный тренировочный центр</p>
+                    </div>
+                </div>
+                <div class="event-item">
+                    <div class="event-date">
+                        <div class="day">10</div>
+                        <div class="month">Июля</div>
+                    </div>
+                    <div class="event-details">
+                        <h3>Экспедиция "Карпатские тропы"</h3>
+                        <p>5-дневный тур по живописным маршрутам Карпат.</p>
+                        <p>Место: Старт из Львова</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Секция контактов -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2 class="section-title">Контакты</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Свяжитесь с нами</h3>
+                    <p>Телефон: +7 (495) 123-45-67</p>
+                    <p>Email: info@enduromoto.ru</p>
+                    <p>Адрес: Москва, ул. Мотоциклетная, д. 15</p>
+                    <p>Режим работы: Пн-Пт 10:00-20:00, Сб-Вс 10:00-18:00</p>
+                </div>
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <input type="text" placeholder="Ваше имя" required>
+                        <input type="email" placeholder="Ваш email" required>
+                        <input type="tel" placeholder="Ваш телефон">
+                        <textarea placeholder="Ваше сообщение" rows="5" required></textarea>
+                        <button type="submit">Отправить</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Подвал -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="copyright">
+                    <p>&copy; 2023 EnduroMoto. Все права защищены.</p>
+                </div>
+                <div class="social-links">
+                    <a href="#">VK</a>
+                    <a href="#">Instagram</a>
+                    <a href="#">YouTube</a>
+                    <a href="#">Telegram</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Плавная прокрутка к якорям
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Обработка формы
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Спасибо за ваше сообщение! Мы свяжемся с вами в ближайшее время.');
+            this.reset();
+        });
+        
+        // Изменение прозрачности шапки при скролле
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.backgroundColor = 'rgba(26, 26, 26, 0.9)';
+            } else {
+                header.style.backgroundColor = '#1a1a1a';
+            }
+        });
+    </script>
+</body>
+</html>
